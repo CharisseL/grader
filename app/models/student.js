@@ -40,7 +40,7 @@ Student.prototype.isSuspended = function(){
       failedTests.push(this.tests[i]);
     }
   }
-  if(failedTests.length === 0){
+  if(failedTests.length >= 3){
     this.isSuspended = true;
   }
 };
