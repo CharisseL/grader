@@ -1,0 +1,32 @@
+{
+  "name": "grader",
+  "version": "0.0.0",
+  "description": "Grade book app exercise.",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "mocha test --recursive -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CharisseL/grader"
+  },
+  "author": "Charisse Lambert <charisse8@gmail.com>",
+  "contributor": "Nathan Vasquez <super.artie@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CharisseL/grader/issues"
+  },
+  "homepage": "https://github.com/CharisseL/grader",
+  "dependencies": {
+    "express": "^4.7.4",
+    "morgan": "^1.2.2"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jshint-stylish": "^0.4.0",
+    "mocha": "^1.21.3"
+  }
+}
