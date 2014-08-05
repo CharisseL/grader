@@ -9,20 +9,26 @@ var Mongo = require('mongodb');
 var Student = require('../../app/models/student');
 
 var jack, jill;
+
 describe('Item', function(){
-/*
+
   before(function(done){
     dbConnect('student-test', function(){
       done();
     });
   });
+
   beforeEach(function(done){
-    Item.collection.remove(function(){
-      var s1 = {name:'Jack', '4.0', [100, 100, 100]};
+    Student.collection.remove(function(){
+      var s1 = {name:'Jack', avg:'50', letterGrade:'F', tests:[50, 50, 50]};
       jack = new Student(s1);
-      var s2 = {name:'Jill', '3.0', [85, 86, 87]};
+      var s2 = {name:'Jill', avg:'0', letterGrade:'F', tests:[]};
       jill = new Student(s2);
-      
+      jill.addTest('98');
+      jill.addTest('88');
+      jill.addTest('97');
+      jill.calcAvg();
+
       jack.save(function(){
         jill.save(function(){
           done();
@@ -30,7 +36,6 @@ describe('Item', function(){
       });
     });
   });
-*/
 
   describe('constructor', function(){
     it('should create a new constructor', function(){
@@ -78,6 +83,43 @@ describe('Item', function(){
       expect(jill.avg).to.be.within(90, 100);
       expect(jill.isSuspended).to.equal.false;
       expect(jill.letterGrade).to.equal('A');
+    });
+  });
+
+  describe('#isHonor', function(){
+    it('should tell whether or not the student is on the honor roll', function(){
+      var s1 = {name:'Jack', avg:'50', letterGrade:'F', tests:[50, 50, 50]};
+      jack = new Student(s1);
+      expect(jack.isSuspended).to.equal.true;
+      var s2 = {name:'Jill', avg:'0', letterGrade:'F', tests:[]};
+      jill = new Student(s2);
+      jill.addTest('98');
+      jill.addTest('88');
+      jill.addTest('97');
+      jill.calcAvg();
+      expect(jill.isHonor).to.equal.true;
+      expect(jack.ishonor).to.equal.false;
+    });
+  });
+
+  describe('#save', function(){
+    it('should save student info to mongodb', function(done){
+      var s1 = {name:'Jack', avg:'100', letterGrade:'A', tests:[100, 100, 100]};
+      jack = new Student(s1);
+      jack.save(function(){
+        expect(jack._id).to.be.instanceof(Mongo.ObjectID);
+        done();
+      });
+    });
+  });
+
+  describe('.all', function(){
+    it('should find all the students', function(done){
+      Student.all(function(students){
+        expect(students).to.have.length(2);
+        expect(students[0]).to.respondTo('calcAvg');
+        done();
+      });
     });
   });
 });
