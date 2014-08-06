@@ -1,0 +1,7 @@
+extends ../shared/template
+
+block content
+    form(method='post', action='/students')
+      input(name='name', type='text', placeholder='name', autofocus=true)
+      input(name='color', type='color', placeholder='#000')
+      button Add student!

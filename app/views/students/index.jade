@@ -1,0 +1,31 @@
+extends ../shared/template
+
+block content
+  h2 Student List
+  table
+    thead
+      th Name
+      th Average
+      th Letter Grade
+      th Suspended
+      th Honor Roll
+    each student in students
+      tr(style='background-color:#{student.color};')
+        td
+          li: a(href='/students/#{student._id}')=student.name
+        -if(student.avg){
+        td= student.avg.toFixed(1)
+        -}else{
+        td
+        -}
+        td= student.letterGrade
+        -if(student.isSuspended){
+        td(style='background-color: red;')
+        -}else{
+        td(style='background-color: green;')
+        -}
+        -if(student.isHonor){
+        td(style='background-color: green;')
+        -}else{
+        td(style='background-color: red;')
+        -}

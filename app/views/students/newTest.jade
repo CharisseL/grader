@@ -1,0 +1,7 @@
+extends ../shared/template
+
+block content
+    h1 Add a New Test Score for #{student.name}! Okay! (Yeah)
+    form(method='post', action='/students/#{student._id}/test')
+      input(type='text', name='score', placeholder='enter test score')
+      button Add test score!! Hey! (What)
