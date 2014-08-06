@@ -123,5 +123,16 @@ describe('Item', function(){
     });
   });
 
+  describe('.findById', function(){
+    it('should find a student by id', function(done){
+      Student.findById(jack._id.toString(), function(student){
+        expect(student._id).to.be.instanceof(Mongo.ObjectID);
+        expect(student.name).to.equal('Jack');
+        expect(student).to.respondTo('calcAvg');
+        done();
+      });
+    });
+  });
+
 
 });

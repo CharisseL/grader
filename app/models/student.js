@@ -94,6 +94,18 @@ Student.all = function(cb){
   });
 };
 
+/******************
+ * FIND BY ID     *
+ ******************/
+Student.findById = function(id, cb){
+  var _id = Mongo.ObjectID(id);
+
+  Student.collection.findOne({_id:_id}, function(err, obj){
+    var student = changePrototype(obj);
+    cb(student);
+  });
+};
+
 module.exports = Student;
 
 /*********************
