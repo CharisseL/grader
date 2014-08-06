@@ -15,8 +15,10 @@ function Student(s1){
   this.name = s1.name;
   this.avg = parseFloat(s1.avg);
   this.letterGrade = s1.letterGrade;
-  this.tests = s1.tests;
-  this.isSuspended = this.isSuspended();
+  this.tests = [];
+  this.isSuspended = false;
+  this.isHonor = false;
+  this.color = s1.color;
 }
 
 /******************
@@ -34,7 +36,9 @@ Student.prototype.calcAvg = function(){
   for(var i = 0; i < this.tests.length; i++){
     sum = sum + this.tests[i];
   }
+
   this.avg = sum/this.tests.length;
+
   if(this.avg >= 90){
     this.letterGrade ='A';
   }else if(this.avg >= 80){
@@ -47,27 +51,23 @@ Student.prototype.calcAvg = function(){
     this.letterGrade ='F';
   }
 
-};
 
 /******************
  * IS SUSPENDED   *
  ******************/
-Student.prototype.isSuspended = function(){
   var failedTests = [];
-  for(var i = 0; i < this.tests.length; i++){
-    if(this.tests[i] < 60){
-      failedTests.push(this.tests[i]);
+  for(var j = 0; j < this.tests.length; j++){
+    if(this.tests[j] < 60){
+      failedTests.push(this.tests[j]);
     }
   }
   if(failedTests.length >= 3){
     this.isSuspended = true;
   }
-};
 
 /******************
  * IS HONOR ROLL  *
  ******************/
-Student.prototype.isHonor = function(){
   if(this.avg >= 90){
     this.isHonor = true;
   }else{

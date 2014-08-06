@@ -1,0 +1,13 @@
+#bar-graph{
+  transform: rotate(-180deg);
+  height: 300px;
+  border: 3px solid black;
+  width: 100%;
+  background-color: gray;
+}
+
+.test{
+  width: 10px;
+  float: right;
+  margin: 1em;
+}

@@ -20,9 +20,13 @@ describe('Item', function(){
 
   beforeEach(function(done){
     Student.collection.remove(function(){
-      var s1 = {name:'Jack', avg:'50', letterGrade:'F', tests:[50, 50, 50]};
+      var s1 = {name:'Jack', avg:'0', letterGrade:'F'};
       jack = new Student(s1);
-      var s2 = {name:'Jill', avg:'0', letterGrade:'F', tests:[]};
+      jack.addTest('50');
+      jack.addTest('50');
+      jack.addTest('50');
+      jack.calcAvg();
+      var s2 = {name:'Jill', avg:'0', letterGrade:'F'};
       jill = new Student(s2);
       jill.addTest('98');
       jill.addTest('88');
@@ -39,12 +43,10 @@ describe('Item', function(){
 
   describe('constructor', function(){
     it('should create a new constructor', function(){
-      var s1 = {name:'Jack', avg:'100', letterGrade:'A', tests:[100, 100, 100]};
-      jack = new Student(s1);
       expect(jack).to.be.instanceOf(Student);
       expect(jack.name).to.equal('Jack');
-      expect(jack.avg).to.equal(100);
-      expect(jack.letterGrade).to.equal('A');
+      expect(jack.avg).to.equal(50);
+      expect(jack.letterGrade).to.equal('F');
       expect(jack.tests.length).to.equal(3);
     });
   });
@@ -61,11 +63,8 @@ describe('Item', function(){
   
   describe('#calcAvg', function(){
     it('should calculate the average of all test scores', function(){
-      var s1 = {name:'Jack', avg:'100', letterGrade:'A', tests:[100, 90]};
-      jack = new Student(s1);
-      jack.calcAvg();
-      expect(jack.avg).to.equal(95);
-      expect(jack.letterGrade).to.equal('A');
+      expect(jack.avg).to.equal(50);
+      expect(jack.letterGrade).to.equal('F');
     });
   });
   
@@ -98,7 +97,7 @@ describe('Item', function(){
       jill.addTest('97');
       jill.calcAvg();
       expect(jill.isHonor).to.equal.true;
-      expect(jack.ishonor).to.equal.false;
+      expect(jack.isHonor).to.equal.false;
     });
   });
 

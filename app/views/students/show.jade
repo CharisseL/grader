@@ -1,0 +1,10 @@
+extends ../shared/template
+
+block content
+    h1 Student: #{student.name}
+    ul
+      li: a(href='/students/#{student._id}/test') Add a test score
+    #bar-graph
+      -for(var i = 0; i < student.tests.length; i++){
+      .test(style='height:#{student.tests[i]}%; background-color:green;')
+      -}
